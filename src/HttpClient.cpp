@@ -99,6 +99,42 @@ void HttpClient::postAsynchronously(const char *url, const char *data) {
   runAsynchronously();
 }
 
+unsigned int HttpClient::patch(String &url, String &data) {
+    return patch(url.c_str(), data.c_str());
+}
+
+unsigned int HttpClient::patch(const char *url, const char *data) {
+  begin("curl");
+  if (insecure) {
+    addParameter("-k");
+  }
+  addParameter("--request");
+  addParameter("PATCH");
+  addParameter("--data");
+  addParameter(data);
+  addHeader();
+  addParameter(url);
+  return run();
+}
+
+void HttpClient::patchAsynchronously(String &url, String &data) {
+  patchAsynchronously(url.c_str(), data.c_str());
+}
+
+void HttpClient::patchAsynchronously(const char *url, const char *data) {
+  begin("curl");
+  if (insecure) {
+    addParameter("-k");
+  }
+  addParameter("--request");
+  addParameter("PATCH");
+  addParameter("--data");
+  addParameter(data);
+  addHeader();
+  addParameter(url);
+  runAsynchronously();
+}
+
 boolean HttpClient::ready() {
   return !running();
 }
