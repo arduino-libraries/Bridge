@@ -242,9 +242,16 @@ void BridgeClass::dropAll() {
 }
 
 // Bridge instance
-#ifdef __AVR_ATmega32U4__
+#if defined(SERIAL_PORT_LINUXBRIDGE)
+SerialBridgeClass Bridge(SERIAL_PORT_LINUXBRIDGE);
+#elif defined(SERIAL_PORT_HARDWARE)
+SerialBridgeClass Bridge(SERIAL_PORT_HARDWARE);
+#elif defined(SERIAL_PORT_HARDWARE_OPEN)
+SerialBridgeClass Bridge(SERIAL_PORT_HARDWARE_OPEN);
+#elif defined(__AVR_ATmega32U4__) // Legacy fallback
 // Leonardo variants (where HardwareSerial is Serial1)
 SerialBridgeClass Bridge(Serial1);
 #else
 SerialBridgeClass Bridge(Serial);
 #endif
+
