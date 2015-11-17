@@ -18,7 +18,7 @@
 
 #include <BridgeClient.h>
 
-BridgeClient::BridgeClient(int _h, BridgeClass &_b) :
+BridgeClient::BridgeClient(uint8_t _h, BridgeClass &_b) :
   bridge(_b), handle(_h), opened(true), buffered(0) {
 }
 
@@ -73,7 +73,7 @@ int BridgeClient::read() {
 }
 
 int BridgeClient::read(uint8_t *buff, size_t size) {
-  int readed = 0;
+  size_t readed = 0;
   do {
     if (buffered == 0) {
       doBuffer();
@@ -142,8 +142,8 @@ int BridgeClient::connect(IPAddress ip, uint16_t port) {
 int BridgeClient::connect(const char *host, uint16_t port) {
   uint8_t tmp[] = {
     'C',
-    (port >> 8) & 0xFF,
-    port & 0xFF
+    static_cast<uint8_t>(port >> 8),
+    static_cast<uint8_t>(port)
   };
   uint8_t res[1];
   int l = bridge.transfer(tmp, 3, (const uint8_t *)host, strlen(host), res, 1);

@@ -25,7 +25,7 @@
 class BridgeClient : public Client {
   public:
     // Constructor with a user provided BridgeClass instance
-    BridgeClient(int _h, BridgeClass &_b = Bridge);
+    BridgeClient(uint8_t _h, BridgeClass &_b = Bridge);
     BridgeClient(BridgeClass &_b = Bridge);
     ~BridgeClient();
 
@@ -55,7 +55,7 @@ class BridgeClient : public Client {
 
   private:
     BridgeClass &bridge;
-    unsigned int handle;
+    uint8_t handle;
     boolean opened;
 
   private:

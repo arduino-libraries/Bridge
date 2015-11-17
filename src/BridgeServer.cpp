@@ -26,8 +26,8 @@ BridgeServer::BridgeServer(uint16_t _p, BridgeClass &_b) :
 void BridgeServer::begin() {
   uint8_t tmp[] = {
     'N',
-    (port >> 8) & 0xFF,
-    port & 0xFF
+    static_cast<uint8_t>(port >> 8),
+    static_cast<uint8_t>(port)
   };
   uint8_t res[1];
   String address = F("127.0.0.1");
