@@ -120,15 +120,15 @@ void File::doBuffer() {
   // Try to buffer up to BUFFER_SIZE characters
   readPos = 0;
   uint8_t cmd[] = {'G', handle, BUFFER_SIZE - 1};
-  buffered = bridge.transfer(cmd, 3, buffer, BUFFER_SIZE);
+  uint16_t readed = bridge.transfer(cmd, 3, buffer, BUFFER_SIZE);
   //err = buff[0]; // First byte is error code
-  if (BridgeClass::TRANSFER_TIMEOUT == buffered || 0 == buffered) {
+  if (readed == BridgeClass::TRANSFER_TIMEOUT || readed == 0) {
     // transfer failed to retrieve any data
     buffered = 0;
   } else {
     // transfer retrieved at least one byte of data so skip the error code character
     readPos++;
-    buffered--;
+    buffered = readed - 1;
   }
 }
 
