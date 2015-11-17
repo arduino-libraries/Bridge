@@ -26,7 +26,7 @@ File::File(BridgeClass &b) : bridge(b), mode(255) {
 
 File::File(const char *_filename, uint8_t _mode, BridgeClass &b) : bridge(b), mode(_mode) {
   filename = _filename;
-  char modes[] = {'r', 'w', 'a'};
+  uint8_t modes[] = {'r', 'w', 'a'};
   uint8_t cmd[] = {'F', modes[mode]};
   uint8_t res[2];
   dirPosition = 1;
@@ -84,10 +84,10 @@ boolean File::seek(uint32_t position) {
   uint8_t cmd[] = {
     's',
     handle,
-    (position >> 24) & 0xFF,
-    (position >> 16) & 0xFF,
-    (position >> 8) & 0xFF,
-    position & 0xFF
+    static_cast<uint8_t>(position >> 24),
+    static_cast<uint8_t>(position >> 16),
+    static_cast<uint8_t>(position >> 8),
+    static_cast<uint8_t>(position)
   };
   uint8_t res[1];
   bridge.transfer(cmd, 6, res, 1);
@@ -104,10 +104,11 @@ uint32_t File::position() {
   uint8_t res[5];
   bridge.transfer(cmd, 2, res, 5);
   //err = res[0]; // res[0] contains error code
-  uint32_t pos = res[1] << 24;
-  pos += res[2] << 16;
-  pos += res[3] << 8;
-  pos += res[4];
+  uint32_t pos;
+  pos  = static_cast<uint32_t>(res[1]) << 24;
+  pos += static_cast<uint32_t>(res[2]) << 16;
+  pos += static_cast<uint32_t>(res[3]) << 8;
+  pos += static_cast<uint32_t>(res[4]);
   return pos - buffered;
 }
 

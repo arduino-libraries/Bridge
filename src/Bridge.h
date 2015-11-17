@@ -70,7 +70,7 @@ class BridgeClass {
       return bridgeVersion;
     }
 
-    static const int TRANSFER_TIMEOUT = 0xFFFF;
+    static const uint16_t TRANSFER_TIMEOUT = 0xFFFF;
 
   private:
     uint8_t index;
