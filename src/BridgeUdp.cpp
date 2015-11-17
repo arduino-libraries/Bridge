@@ -179,7 +179,7 @@ IPAddress BridgeUDP::remoteIP()
     return -1;
   uint8_t cmd[] = {'T', handle};
   uint8_t res[7];
-  uint16_t l = bridge.transfer(cmd, 2, res, 7);
+  bridge.transfer(cmd, 2, res, 7);
   if (res[0] == 0)
     return IPAddress(0,0,0,0);
   return IPAddress(res[1], res[2], res[3], res[4]);
@@ -191,7 +191,7 @@ uint16_t BridgeUDP::remotePort()
     return -1;
   uint8_t cmd[] = {'T', handle};
   uint8_t res[7];
-  uint16_t l = bridge.transfer(cmd, 2, res, 7);
+  bridge.transfer(cmd, 2, res, 7);
   if (res[0] == 0)
     return 0;
   return (res[5] << 8) + res[6];

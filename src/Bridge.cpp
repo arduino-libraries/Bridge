@@ -245,8 +245,8 @@ void BridgeClass::dropAll() {
 #include <Reset.h>
 #endif
 
-void checkForRemoteSketchUpdate(uint8_t pin) {
 #if defined(ARDUINO_ARCH_SAM)
+void checkForRemoteSketchUpdate(uint8_t pin) {
   // The host force pin LOW to signal that a new sketch is coming
   pinMode(pin, INPUT_PULLUP);
   delay(50);
@@ -258,10 +258,12 @@ void checkForRemoteSketchUpdate(uint8_t pin) {
 
   // Restore in standard state
   pinMode(pin, INPUT);
-#else
-  // Empty, bootloader is enough.
-#endif
 }
+#else
+void checkForRemoteSketchUpdate(uint8_t /* pin */) {
+  // Empty, bootloader is enough.
+}
+#endif
 
 // Bridge instance
 #if defined(SERIAL_PORT_LINUXBRIDGE)
