@@ -42,10 +42,10 @@ class BridgeServer : public Server {
     }
 
   private:
+    BridgeClass &bridge;
     uint16_t port;
     bool listening;
     bool useLocalhost;
-    BridgeClass &bridge;
 };
 
 #endif // _BRIDGE_SERVER_H_

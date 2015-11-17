@@ -20,11 +20,11 @@
 
 namespace BridgeLib {
 
-File::File(BridgeClass &b) : mode(255), bridge(b) {
+File::File(BridgeClass &b) : bridge(b), mode(255) {
   // Empty
 }
 
-File::File(const char *_filename, uint8_t _mode, BridgeClass &b) : mode(_mode), bridge(b) {
+File::File(const char *_filename, uint8_t _mode, BridgeClass &b) : bridge(b), mode(_mode) {
   filename = _filename;
   char modes[] = {'r', 'w', 'a'};
   uint8_t cmd[] = {'F', modes[mode]};
