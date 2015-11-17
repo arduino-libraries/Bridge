@@ -111,6 +111,14 @@ class SerialBridgeClass : public BridgeClass {
 
 extern SerialBridgeClass Bridge;
 
+// Some microcrontrollers don't start the bootloader after a reset.
+// This function is intended to let the microcontroller erase its
+// flash after checking a specific signal coming from the external
+// device without the need to press the erase button on the board.
+// The purpose is to enable a software update that does not require
+// a manual interaction with the board.
+extern void checkForRemoteSketchUpdate(uint8_t pin = 7);
+
 #endif /* BRIDGE_H_ */
 
 #include <Console.h>

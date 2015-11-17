@@ -241,6 +241,28 @@ void BridgeClass::dropAll() {
   }
 }
 
+#if defined(ARDUINO_ARCH_SAM)
+#include <Reset.h>
+#endif
+
+void checkForRemoteSketchUpdate(uint8_t pin) {
+#if defined(ARDUINO_ARCH_SAM)
+  // The host force pin LOW to signal that a new sketch is coming
+  pinMode(pin, INPUT_PULLUP);
+  delay(50);
+  if (digitalRead(pin) == LOW) {
+    initiateReset(1);
+    while (true)
+      ; // Wait for reset to SAM-BA
+  }
+
+  // Restore in standard state
+  pinMode(pin, INPUT);
+#else
+  // Empty, bootloader is enough.
+#endif
+}
+
 // Bridge instance
 #if defined(SERIAL_PORT_LINUXBRIDGE)
 SerialBridgeClass Bridge(SERIAL_PORT_LINUXBRIDGE);
