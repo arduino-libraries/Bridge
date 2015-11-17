@@ -30,6 +30,7 @@ class BridgeUDP : public UDP {
 
     virtual int beginPacket(IPAddress ip, uint16_t port);
     virtual int beginPacket(const char *host, uint16_t port);
+    virtual int beginBroadcastPacket(uint16_t port);
     virtual int endPacket();
     virtual size_t write(uint8_t d) { return write(&d, 1); }
     virtual size_t write(const uint8_t *buffer, size_t size);

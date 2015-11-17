@@ -56,6 +56,16 @@ int BridgeUDP::beginPacket(const char *host, uint16_t port)
   return res[0]; // 1=Success, 0=Error
 }
 
+int BridgeUDP::beginBroadcastPacket(uint16_t port)
+{
+  if (!opened)
+    return 0;
+  uint8_t cmd[] = {'v', handle, (uint8_t)((port >> 8) & 0xFF), (uint8_t)(port & 0xFF)};
+  uint8_t res[1];
+  bridge.transfer(cmd, 4, res, 1);
+  return res[0]; // 1=Success, 0=Error
+}
+
 int BridgeUDP::beginPacket(IPAddress ip, uint16_t port)
 {
   if (!opened)
