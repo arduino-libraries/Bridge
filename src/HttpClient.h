@@ -33,6 +33,14 @@ class HttpClient : public Process {
     unsigned int post(const char * url, const char * data);
     void postAsynchronously(String &url, String &data);
     void postAsynchronously(const char * url, const char * data);
+    unsigned int patch(String &url, String &data);
+    unsigned int patch(const char * url, const char * data);
+    void patchAsynchronously(String &url, String &data);
+    void patchAsynchronously(const char * url, const char * data);
+    unsigned int put(String &url, String &data);
+    unsigned int put(const char * url, const char * data);
+    void putAsynchronously(String &url, String &data);
+    void putAsynchronously(const char * url, const char * data);
     void setHeader(String &header);
     void setHeader(const char * header);
     boolean ready();
