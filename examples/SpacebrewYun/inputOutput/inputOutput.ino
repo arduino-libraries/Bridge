@@ -36,11 +36,11 @@ int counter = 0;
 void setup() {
 
   // start the serial port
-  Serial.begin(57600);
+  SerialUSB.begin(57600);
 
   // for debugging, wait until a serial console is connected
   delay(4000);
-  while (!Serial) {
+  while (!SerialUSB) {
     ;
   }
 
@@ -101,34 +101,34 @@ void loop() {
 // define handler methods, all standard data type handlers take two appropriate arguments
 
 void handleRange(String route, int value) {
-  Serial.print("Range msg ");
-  Serial.print(route);
-  Serial.print(", value ");
-  Serial.println(value);
+  SerialUSB.print("Range msg ");
+  SerialUSB.print(route);
+  SerialUSB.print(", value ");
+  SerialUSB.println(value);
 }
 
 void handleString(String route, String value) {
-  Serial.print("String msg ");
-  Serial.print(route);
-  Serial.print(", value ");
-  Serial.println(value);
+  SerialUSB.print("String msg ");
+  SerialUSB.print(route);
+  SerialUSB.print(", value ");
+  SerialUSB.println(value);
 }
 
 void handleBoolean(String route, boolean value) {
-  Serial.print("Boolen msg ");
-  Serial.print(route);
-  Serial.print(", value ");
-  Serial.println(value ? "true" : "false");
+  SerialUSB.print("Boolen msg ");
+  SerialUSB.print(route);
+  SerialUSB.print(", value ");
+  SerialUSB.println(value ? "true" : "false");
 }
 
 // custom data type handlers takes three String arguments
 
 void handleCustom(String route, String value, String type) {
-  Serial.print("Custom msg ");
-  Serial.print(route);
-  Serial.print(" of type ");
-  Serial.print(type);
-  Serial.print(", value ");
-  Serial.println(value);
+  SerialUSB.print("Custom msg ");
+  SerialUSB.print(route);
+  SerialUSB.print(" of type ");
+  SerialUSB.print(type);
+  SerialUSB.print(", value ");
+  SerialUSB.println(value);
 }
 

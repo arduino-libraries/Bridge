@@ -19,10 +19,10 @@ void setup() {
   // Setup Bridge (needed every time we communicate with the Arduino Yún)
   Bridge.begin();
   // Initialize the Serial
-  Serial.begin(9600);
+  SerialUSB.begin(9600);
 
-  while (!Serial); // wait for Serial port to connect.
-  Serial.println("File Write Script example\n\n");
+  while (!SerialUSB); // wait for Serial port to connect.
+  SerialUSB.println("File Write Script example\n\n");
 
   // Setup File IO
   FileSystem.begin();
@@ -78,7 +78,7 @@ void runScript() {
   }
   // remove the blank spaces at the beginning and the ending of the string
   output.trim();
-  Serial.println(output);
-  Serial.flush();
+  SerialUSB.println(output);
+  SerialUSB.flush();
 }
 

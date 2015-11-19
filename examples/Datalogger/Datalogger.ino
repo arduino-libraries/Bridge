@@ -38,8 +38,8 @@ void setup() {
   Serial.begin(9600);
   FileSystem.begin();
 
-  while (!Serial); // wait for Serial port to connect.
-  Serial.println("Filesystem datalogger\n");
+  while (!SerialUSB); // wait for Serial port to connect.
+  SerialUSB.println("Filesystem datalogger\n");
 }
 
 
@@ -68,11 +68,11 @@ void loop() {
     dataFile.println(dataString);
     dataFile.close();
     // print to the serial port too:
-    Serial.println(dataString);
+    SerialUSB.println(dataString);
   }
   // if the file isn't open, pop up an error:
   else {
-    Serial.println("error opening datalog.txt");
+    SerialUSB.println("error opening datalog.txt");
   }
 
   delay(15000);

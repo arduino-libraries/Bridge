@@ -30,13 +30,13 @@ void setup() {
   digitalWrite(13, HIGH);
 
   // Initialize Serial
-  Serial.begin(9600);
+  SerialUSB.begin(9600);
 
   // Wait until a Serial Monitor is connected.
-  while (!Serial);
+  while (!SerialUSB);
 
-  Serial.println("Mailbox Read Message\n");
-  Serial.println("The Mailbox is checked every 10 seconds. The incoming messages will be shown below.\n");
+  SerialUSB.println("Mailbox Read Message\n");
+  SerialUSB.println("The Mailbox is checked every 10 seconds. The incoming messages will be shown below.\n");
 }
 
 void loop() {
@@ -47,10 +47,10 @@ void loop() {
     // read all the messages present in the queue
     while (Mailbox.messageAvailable()) {
       Mailbox.readMessage(message);
-      Serial.println(message);
+      SerialUSB.println(message);
     }
 
-    Serial.println("Waiting 10 seconds before checking the Mailbox again");
+    SerialUSB.println("Waiting 10 seconds before checking the Mailbox again");
   }
 
   // wait 10 seconds

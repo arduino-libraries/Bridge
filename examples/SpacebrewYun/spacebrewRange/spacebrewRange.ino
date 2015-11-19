@@ -37,11 +37,11 @@ int last_value = 0;
 void setup() {
 
   // start the serial port
-  Serial.begin(57600);
+  SerialUSB.begin(57600);
 
   // for debugging, wait until a serial console is connected
   delay(4000);
-  while (!Serial) {
+  while (!SerialUSB) {
     ;
   }
 
@@ -80,9 +80,9 @@ void loop() {
 // handler method that is called whenever a new string message is received
 void handleRange(String route, int value) {
   // print the message that was received
-  Serial.print("From ");
-  Serial.print(route);
-  Serial.print(", received msg: ");
-  Serial.println(value);
+  SerialUSB.print("From ");
+  SerialUSB.print(route);
+  SerialUSB.print(", received msg: ");
+  SerialUSB.println(value);
 }
 

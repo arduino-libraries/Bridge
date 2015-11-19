@@ -46,7 +46,7 @@ String startString;
 long hits = 0;
 
 void setup() {
-  Serial.begin(9600);
+  SerialUSB.begin(9600);
 
   // Bridge startup
   pinMode(13, OUTPUT);
@@ -83,7 +83,7 @@ void loop() {
     // read the command
     String command = client.readString();
     command.trim();        //kill whitespace
-    Serial.println(command);
+    SerialUSB.println(command);
     // is "temperature" command?
     if (command == "temperature") {
 
@@ -95,7 +95,7 @@ void loop() {
         char c = time.read();
         timeString += c;
       }
-      Serial.println(timeString);
+      SerialUSB.println(timeString);
       int sensorValue = analogRead(A1);
       // convert the reading to millivolts:
       float voltage = sensorValue * (5000.0f / 1024.0f);

@@ -25,10 +25,10 @@
 
 void setup() {
   Bridge.begin();	// Initialize the Bridge
-  Serial.begin(9600);	// Initialize the Serial
+  SerialUSB.begin(9600);	// Initialize the Serial
 
   // Wait until a Serial Monitor is connected.
-  while (!Serial);
+  while (!SerialUSB);
 }
 
 void loop() {
@@ -46,7 +46,7 @@ void loop() {
     int result = p.parseInt();			// look for an integer
     int signal = map(result, 0, 100, 0, 255);	// map result from 0-100 range to 0-255
     analogWrite(9, signal);			// set the brightness of LED on pin 9
-    Serial.println(result);			// print the number as well
+    SerialUSB.println(result);			// print the number as well
   }
   delay(5000);  // wait 5 seconds before you do it again
 }

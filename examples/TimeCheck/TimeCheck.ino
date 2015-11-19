@@ -23,10 +23,10 @@ int lastSecond = -1;          // need an impossible value for comparison
 
 void setup() {
   Bridge.begin();        // initialize Bridge
-  Serial.begin(9600);    // initialize serial
+  SerialUSB.begin(9600);    // initialize serial
 
   while (!Serial);              // wait for Serial Monitor to open
-  Serial.println("Time Check");  // Title of sketch
+  SerialUSB.println("Time Check");  // Title of sketch
 
   // run an initial date process. Should return:
   // hh:mm:ss :
@@ -42,19 +42,19 @@ void loop() {
   if (lastSecond != seconds) { // if a second has passed
     // print the time:
     if (hours <= 9) {
-      Serial.print("0");  // adjust for 0-9
+      SerialUSB.print("0");  // adjust for 0-9
     }
-    Serial.print(hours);
-    Serial.print(":");
+    SerialUSB.print(hours);
+    SerialUSB.print(":");
     if (minutes <= 9) {
-      Serial.print("0");  // adjust for 0-9
+      SerialUSB.print("0");  // adjust for 0-9
     }
-    Serial.print(minutes);
-    Serial.print(":");
+    SerialUSB.print(minutes);
+    SerialUSB.print(":");
     if (seconds <= 9) {
-      Serial.print("0");  // adjust for 0-9
+      SerialUSB.print("0");  // adjust for 0-9
     }
-    Serial.println(seconds);
+    SerialUSB.println(seconds);
 
     // restart the date process:
     if (!date.running()) {

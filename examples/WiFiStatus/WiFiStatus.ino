@@ -21,10 +21,10 @@
 #include <Process.h>
 
 void setup() {
-  Serial.begin(9600);  // initialize serial communication
-  while (!Serial);     // do nothing until the serial monitor is opened
+  SerialUSB.begin(9600);  // initialize serial communication
+  while (!SerialUSB);     // do nothing until the serial monitor is opened
 
-  Serial.println("Starting bridge...\n");
+  SerialUSB.println("Starting bridge...\n");
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
   Bridge.begin();  // make contact with the linux processor
@@ -42,10 +42,10 @@ void loop() {
   // process, print them to the serial monitor:
   while (wifiCheck.available() > 0) {
     char c = wifiCheck.read();
-    Serial.print(c);
+    SerialUSB.print(c);
   }
 
-  Serial.println();
+  SerialUSB.println();
 
   delay(5000);
 }

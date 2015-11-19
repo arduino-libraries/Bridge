@@ -1,5 +1,5 @@
 /*
-  Yún HTTP Client
+  Yún HTTP Client Console version for Arduino Uno and Mega using Yún Shield
 
  This example for the Arduino Yún shows how create a basic
  HTTP client that connects to the internet and downloads
@@ -8,6 +8,7 @@
 
  created by Tom igoe
  May 2013
+ modified by Marco Brianza to use Console
 
  This example code is in the public domain.
 
@@ -17,6 +18,7 @@
 
 #include <Bridge.h>
 #include <HttpClient.h>
+#include <Console.h>
 
 void setup() {
   // Bridge takes about two seconds to start up
@@ -27,9 +29,9 @@ void setup() {
   Bridge.begin();
   digitalWrite(13, HIGH);
 
-  SerialUSB.begin(9600);
+  Console.begin();
 
-  while (!SerialUSB); // wait for a serial connection
+  while (!Console); // wait for a serial connection
 }
 
 void loop() {
@@ -43,9 +45,9 @@ void loop() {
   // from the server, read them and print them:
   while (client.available()) {
     char c = client.read();
-    SerialUSB.print(c);
+    Console.print(c);
   }
-  SerialUSB.flush();
+  Console.flush();
 
   delay(5000);
 }

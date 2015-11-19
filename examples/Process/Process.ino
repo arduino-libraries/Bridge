@@ -20,10 +20,10 @@ void setup() {
   Bridge.begin();
 
   // Initialize Serial
-  Serial.begin(9600);
+  SerialUSB.begin(9600);
 
   // Wait until a Serial Monitor is connected.
-  while (!Serial);
+  while (!SerialUSB);
 
   // run various example processes
   runCurl();
@@ -46,10 +46,10 @@ void runCurl() {
   // A process output can be read with the stream methods
   while (p.available() > 0) {
     char c = p.read();
-    Serial.print(c);
+    SerialUSB.print(c);
   }
   // Ensure the last bit of data is sent.
-  Serial.flush();
+  SerialUSB.flush();
 }
 
 void runCpuInfo() {
@@ -60,13 +60,13 @@ void runCpuInfo() {
   p.addParameter("/proc/cpuinfo"); // Add the cpuifo file path as parameter to cut
   p.run();		// Run the process and wait for its termination
 
-  // Print command output on the Serial.
+  // Print command output on the SerialUSB.
   // A process output can be read with the stream methods
   while (p.available() > 0) {
     char c = p.read();
-    Serial.print(c);
+    SerialUSB.print(c);
   }
   // Ensure the last bit of data is sent.
-  Serial.flush();
+  SerialUSB.flush();
 }
 
