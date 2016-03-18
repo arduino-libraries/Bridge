@@ -72,6 +72,8 @@ class BridgeClass {
 
     static const uint16_t TRANSFER_TIMEOUT = 0xFFFF;
 
+    void wifiConfig(String yunName, String yunPsw, String wifissid, String wifipsw, String wifiAPname, String countryCode);
+
   private:
     uint8_t index;
     int timedRead(unsigned int timeout);

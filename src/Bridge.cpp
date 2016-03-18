@@ -279,3 +279,31 @@ SerialBridgeClass Bridge(Serial1);
 SerialBridgeClass Bridge(Serial);
 #endif
 
+void BridgeClass::wifiConfig(String yunName, String yunPsw, String wifissid, String wifipsw, String wifiAPname, String countryCode){
+  Process p;
+
+  p.runShellCommand("blink-start 100"); //start the blue blink
+
+  p.runShellCommand("hostname " + yunName); //change the current hostname
+  p.runShellCommand("uci set system.@system[0].hostname='" + yunName + "'"); //change teh hostname in uci
+
+  p.runShellCommand("uci set arduino.@arduino[0].access_point_wifi_name='" + wifiAPname + "'");
+
+  //this block resets the wifi psw
+  p.runShellCommand("uci set wireless.@wifi-iface[0].encryption='psk2'");
+  p.runShellCommand("uci set wireless.@wifi-iface[0].mode='sta'");
+  p.runShellCommand("uci set wireless.@wifi-iface[0].ssid='" + wifissid + "'");
+  p.runShellCommand("uci set wireless.@wifi-iface[0].key='" + wifipsw + "'");
+  p.runShellCommand("uci set wireless.radio0.channel='auto'");
+  p.runShellCommand("uci set wireless.radio0.country='" + countryCode + "'");
+  p.runShellCommand("uci delete network.lan.ipaddr");
+  p.runShellCommand("uci delete network.lan.netmask");
+  p.runShellCommand("uci set network.lan.proto='dhcp'");
+
+  p.runShellCommand("echo -e \"" + yunPsw + "\n" + yunPsw + "\" | passwd root"); //change the passwors
+  p.runShellCommand("uci commit"); //save the mods done via UCI
+  p.runShellCommand("blink-stop"); //start the blue blink
+
+  p.runShellCommand("wifi ");
+
+}
