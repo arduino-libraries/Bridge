@@ -45,13 +45,14 @@ class BridgeClient : public Client {
       return opened;
     }
 
-    BridgeClient& operator=(const BridgeClient &_x);
+    virtual BridgeClient& operator=(const BridgeClient &_x);
 
     virtual void stop();
     virtual uint8_t connected();
 
     virtual int connect(IPAddress ip, uint16_t port);
     virtual int connect(const char *host, uint16_t port);
+    int connectSSL(const char* host, uint16_t port);
 
   private:
     BridgeClass &bridge;
@@ -67,4 +68,13 @@ class BridgeClient : public Client {
 
 };
 
+class BridgeSSLClient : public BridgeClient {
+  public:
+    // Constructor with a user provided BridgeClass instance
+    BridgeSSLClient(uint8_t _h, BridgeClass &_b = Bridge);
+    BridgeSSLClient(BridgeClass &_b = Bridge);
+    ~BridgeSSLClient();
+
+    virtual int connect(const char* host, uint16_t port);
+};
 #endif // _BRIDGE_CLIENT_H_

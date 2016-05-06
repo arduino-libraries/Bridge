@@ -171,3 +171,51 @@ int BridgeClient::connect(const char *host, uint16_t port) {
   return 0;
 }
 
+int BridgeClient::connectSSL(const char *host, uint16_t port) {
+  uint8_t tmp[] = {
+    'Z',
+    static_cast<uint8_t>(port >> 8),
+    static_cast<uint8_t>(port)
+  };
+  uint8_t res[1];
+  int l = bridge.transfer(tmp, 3, (const uint8_t *)host, strlen(host), res, 1);
+  if (l == 0)
+    return 0;
+  handle = res[0];
+
+  // wait for connection
+  uint8_t tmp2[] = { 'c', handle };
+  uint8_t res2[1];
+  while (true) {
+    bridge.transfer(tmp2, 2, res2, 1);
+    if (res2[0] == 0)
+      break;
+    delay(1);
+  }
+  opened = true;
+
+  // check for successful connection
+  if (connected())
+    return 1;
+
+  stop();
+  handle = 0;
+  return 0;
+}
+
+BridgeSSLClient::BridgeSSLClient(uint8_t _h, BridgeClass &_b) : 
+  BridgeClient(_h, _b)
+{
+}
+
+BridgeSSLClient::BridgeSSLClient(BridgeClass &_b): 
+  BridgeClient(_b)
+{
+}
+
+BridgeSSLClient::~BridgeSSLClient() {
+}
+
+int BridgeSSLClient::connect(const char *host, uint16_t port) {
+  return BridgeClient::connectSSL(host, port);
+}
