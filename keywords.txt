@@ -17,6 +17,7 @@ YunServer	KEYWORD1	YunServerConstructor
 YunClient	KEYWORD1	YunClientConstructor
 BridgeServer	KEYWORD1	YunServerConstructor
 BridgeClient	KEYWORD1	YunClientConstructor
+BridgeSSLClient	KEYWORD1	YunClientConstructor
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -78,6 +79,7 @@ getResult	KEYWORD2
 accept	KEYWORD2
 stop	KEYWORD2
 connect	KEYWORD2
+connectSSL	KEYWORD2
 connected	KEYWORD2
 
 
