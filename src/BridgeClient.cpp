@@ -205,20 +205,3 @@ int BridgeClient::connectSSL(const char *host, uint16_t port) {
   handle = 0;
   return 0;
 }
-
-BridgeSSLClient::BridgeSSLClient(uint8_t _h, BridgeClass &_b) : 
-  BridgeClient(_h, _b)
-{
-}
-
-BridgeSSLClient::BridgeSSLClient(BridgeClass &_b): 
-  BridgeClient(_b)
-{
-}
-
-BridgeSSLClient::~BridgeSSLClient() {
-}
-
-int BridgeSSLClient::connect(const char *host, uint16_t port) {
-  return BridgeClient::connectSSL(host, port);
-}

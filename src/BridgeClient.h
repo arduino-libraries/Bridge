@@ -68,13 +68,4 @@ class BridgeClient : public Client {
 
 };
 
-class BridgeSSLClient : public BridgeClient {
-  public:
-    // Constructor with a user provided BridgeClass instance
-    BridgeSSLClient(uint8_t _h, BridgeClass &_b = Bridge);
-    BridgeSSLClient(BridgeClass &_b = Bridge);
-    ~BridgeSSLClient();
-
-    virtual int connect(const char* host, uint16_t port);
-};
 #endif // _BRIDGE_CLIENT_H_
