@@ -172,6 +172,9 @@ int BridgeClient::connect(const char *host, uint16_t port) {
 }
 
 int BridgeClient::connectSSL(const char *host, uint16_t port) {
+  if (bridge.getBridgeVersion() < 161)
+    return -1;
+
   uint8_t tmp[] = {
     'Z',
     static_cast<uint8_t>(port >> 8),
