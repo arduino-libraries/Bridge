@@ -2,7 +2,7 @@
 /*
   Arduino Yún First configuration sketch
 
-  Configures the Yun's wifi and infos via the Bridge
+  Configures the Yún101/YunShield/Yún WiFi and infos via the Bridge
   Works correctly if Line Ending is set as "NewLine"
   If your board has two USB ports, use the Native one
 
