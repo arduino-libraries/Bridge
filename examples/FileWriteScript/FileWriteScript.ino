@@ -1,7 +1,7 @@
 /*
   Write to file using FileIO classes.
 
- This sketch demonstrate how to write file into the Yún101/YunShield/Yún filesystem.
+ This sketch demonstrate how to write file into the YunShield/Yún filesystem.
  A shell script file is created in /tmp, and it is executed afterwards.
 
  created 7 June 2010

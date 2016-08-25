@@ -1,5 +1,5 @@
 /*
-Console Read example for Yún101/YunShield/Yún
+Console Read example for YunShield/Yún
 
  Read data coming from bridge using the Console.read() function
  and store it in a string.

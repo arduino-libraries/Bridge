@@ -1,7 +1,7 @@
 /*
   Console Pixel
 
- An example of using Yún101/YunShield/Yún board to receive data from the
+ An example of using YunShield/Yún board to receive data from the
  Console on the Yún.  In this case, the board turns on an LED when
  it receives the character 'H', and turns off the LED when it
  receives the character 'L'.

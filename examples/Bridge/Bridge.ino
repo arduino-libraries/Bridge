@@ -1,7 +1,7 @@
 /*
   Arduino Yún Bridge example
 
-  This example for the Yún101/YunShield/Yún shows how 
+  This example for the YunShield/Yún shows how 
   to use the Bridge library to access the digital and
   analog pins on the board through REST calls.
   It demonstrates how you can create your own API when

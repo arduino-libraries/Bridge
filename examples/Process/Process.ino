@@ -2,7 +2,7 @@
   Running process using Process class.
 
  This sketch demonstrate how to run linux processes
- using a Yún101/YunShield/Yún
+ using a YunShield/Yún
 
  created 5 Jun 2013
  by Cristian Maglie
