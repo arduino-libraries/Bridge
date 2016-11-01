@@ -1,11 +1,11 @@
 /*
   Arduino Yún Bridge example
 
-  This example for the YunShield/Yún shows how 
-  to use the Bridge library to access the digital and
-  analog pins on the board through REST calls.
-  It demonstrates how you can create your own API when
-  using REST style calls through the browser.
+  This example for the Arduino Yún shows how to use the
+  Bridge library to access the digital and analog pins
+  on the board through REST calls. It demonstrates how
+  you can create your own API when using REST style
+  calls through the browser.
 
   Possible commands created in this shetch:
 
@@ -25,6 +25,7 @@
 #include <Bridge.h>
 #include <BridgeServer.h>
 #include <BridgeClient.h>
+#include <EEPROM.h>
 
 // Define constants EEPROM
 #define PIN_MODE 0
@@ -35,16 +36,18 @@
 // Listen to the default port 5555, the Yún webserver
 // will forward there all the HTTP requests you send
 BridgeServer server;
+String response;
 
 void setup() {
   // Recover pin states from memory
   recoverPinStates();
-
+  
   // Bridge startup
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
   Bridge.begin();
   digitalWrite(13, HIGH);
+
 
   // Listen for incoming connection only from localhost
   // (no one from the external network could connect)
@@ -104,15 +107,15 @@ void digitalCommand(BridgeClient client) {
     value = digitalRead(pin);
   }
 
+  // Send feedback to client
+  response = String(digitalRead(pin));
+  client.print(String("{\"status\":"+response+"}"));
+
   // Save Pin State
   savePinState(pin,false,value);
-
-  // Send feedback to client
-  client.print(F("Pin D"));
-  client.print(pin);
-  client.print(F(" set to "));
-  client.println(value);
-
+  
+  // Update datastore key with the current pin value
+  String key = "D";
   key += pin;
   Bridge.put(key, String(value));
 }
@@ -127,18 +130,16 @@ void analogCommand(BridgeClient client) {
   // with a value like: "/analog/5/120"
   if (client.read() == '/') {
     // Read value and execute command
-    value = client.parseInt();
     pinMode(pin, OUTPUT);
+    value = client.parseInt();
     analogWrite(pin, value);
+
+    // Send feedback to client
+    response = String(value);
+    client.print(String("{\"analog\":"+response+"}"));
 
     // Save Pin State
     savePinState(pin,true,value);
-
-    // Send feedback to client
-    client.print(F("Pin D"));
-    client.print(pin);
-    client.print(F(" set to analog "));
-    client.println(value);
 
     // Update datastore key with the current pin value
     String key = "D";
@@ -149,10 +150,8 @@ void analogCommand(BridgeClient client) {
     value = analogRead(pin);
 
     // Send feedback to client
-    client.print(F("Pin A"));
-    client.print(pin);
-    client.print(F(" reads analog "));
-    client.println(value);
+    response = String(value);
+    client.print(String("{\"analog\":"+response+"}"));
 
     // Update datastore key with the current pin value
     String key = "A";
@@ -169,7 +168,7 @@ void modeCommand(BridgeClient client) {
 
   // If the next character is not a '/' we have a malformed URL
   if (client.read() != '/') {
-    client.println(F("error"));
+    client.print(String("{\"error\":\"Malformed URL\"}"));
     return;
   }
 
@@ -178,23 +177,25 @@ void modeCommand(BridgeClient client) {
   if (mode == "input") {
     pinMode(pin, INPUT);
     // Send feedback to client
-    client.print(F("Pin D"));
-    client.print(pin);
-    client.print(F(" configured as INPUT!"));
+    response = String(INPUT);
+    client.print(String("{\"mode\":"+response+"}"));
+
+    // Clear pin state
+    clearPinState(pin);
+
     return;
   }
 
   if (mode == "output") {
     pinMode(pin, OUTPUT);
     // Send feedback to client
-    client.print(F("Pin D"));
-    client.print(pin);
-    client.print(F(" configured as OUTPUT!"));
+    response = String(OUTPUT);
+    client.print(String("{\"mode\":"+response+"}"));
+    
     return;
   }
 
-  client.print(F("error: invalid mode "));
-  client.print(mode);
+  client.print(String("{\"error\":\"Invalid mode "+mode+"\"}"));
 }
 
 void recoverPinStates(){
