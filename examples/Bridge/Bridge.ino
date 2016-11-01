@@ -11,6 +11,7 @@
 
   "/arduino/digital/13"     -> digitalRead(13)
   "/arduino/digital/13/1"   -> pinMode(13, OUTPUT), digitalWrite(13, HIGH)
+  "/arduino/toggle/13"      -> pinMode(13, OUTPUT), digitalWrite(13, !last_state)
   "/arduino/analog/2/123"   -> pinMode(2, OUTPUT), analogWrite(2, 123)
   "/arduino/analog/2"       -> analogRead(2)
   "/arduino/mode/13/input"  -> pinMode(13, INPUT)
@@ -79,6 +80,11 @@ void process(BridgeClient client) {
   if (command == "digital") {
     digitalCommand(client);
   }
+  
+  // is "toggle" command?
+  if (command == "toggle") {
+    toggleCommand(client);
+  }
 
   // is "analog" command?
   if (command == "analog") {
@@ -106,6 +112,29 @@ void digitalCommand(BridgeClient client) {
   } else {
     value = digitalRead(pin);
   }
+
+  // Send feedback to client
+  response = String(digitalRead(pin));
+  client.print(String("{\"status\":"+response+"}"));
+
+  // Save Pin State
+  savePinState(pin,false,value);
+  
+  // Update datastore key with the current pin value
+  String key = "D";
+  key += pin;
+  Bridge.put(key, String(value));
+}
+
+void toggleCommand(BridgeClient client) {
+  int pin, value;
+
+  // Read pin number
+  pin = client.parseInt();
+
+  value = !digitalRead(pin);
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, value);
 
   // Send feedback to client
   response = String(digitalRead(pin));
@@ -224,4 +253,5 @@ void clearPinState(int pin){
   offset = pin*MEMORY_SLOT_SIZE;
   EEPROM.write(offset+PIN_MODE,0);
 }
+
 
