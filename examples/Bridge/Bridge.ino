@@ -26,11 +26,20 @@
 #include <BridgeServer.h>
 #include <BridgeClient.h>
 
+// Define constants EEPROM
+#define PIN_MODE 0
+#define PIN_VALUE 1
+#define MEMORY_SLOT_SIZE 2
+#define TOTAL_PINS 20
+
 // Listen to the default port 5555, the Yún webserver
 // will forward there all the HTTP requests you send
 BridgeServer server;
 
 void setup() {
+  // Recover pin states from memory
+  recoverPinStates();
+
   // Bridge startup
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
@@ -94,14 +103,15 @@ void digitalCommand(BridgeClient client) {
     value = digitalRead(pin);
   }
 
+  // Save Pin State
+  savePinState(pin,false,value);
+
   // Send feedback to client
   client.print(F("Pin D"));
   client.print(pin);
   client.print(F(" set to "));
   client.println(value);
 
-  // Update datastore key with the current pin value
-  String key = "D";
   key += pin;
   Bridge.put(key, String(value));
 }
@@ -118,6 +128,9 @@ void analogCommand(BridgeClient client) {
     // Read value and execute command
     value = client.parseInt();
     analogWrite(pin, value);
+
+    // Save Pin State
+    savePinState(pin,true,value);
 
     // Send feedback to client
     client.print(F("Pin D"));
@@ -181,3 +194,31 @@ void modeCommand(BridgeClient client) {
   client.print(F("error: invalid mode "));
   client.print(mode);
 }
+
+void recoverPinStates(){
+  int i,offset;
+  for(i=0;i<TOTAL_PINS;i++){
+    offset = i*MEMORY_SLOT_SIZE;
+    if(EEPROM.read(offset)==1){//Digital Output
+      pinMode(i,OUTPUT);
+      digitalWrite(i,EEPROM.read(offset+PIN_VALUE));
+    }else if(EEPROM.read(offset)==2){//Digital Output
+      pinMode(i,OUTPUT);
+      analogWrite(i,EEPROM.read(offset+PIN_VALUE));
+    }
+  }
+}
+
+void savePinState(int pin, uint8_t analog, uint8_t value){
+  int offset;
+  offset = pin*MEMORY_SLOT_SIZE;
+  EEPROM.write(offset+PIN_MODE,analog+1); // 1 if digital, 2 if analog
+  EEPROM.write(offset+PIN_VALUE,value);
+}
+
+void clearPinState(int pin){
+  int offset;
+  offset = pin*MEMORY_SLOT_SIZE;
+  EEPROM.write(offset+PIN_MODE,0);
+}
+
