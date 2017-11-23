@@ -166,8 +166,8 @@ uint16_t BridgeClass::transfer(const uint8_t *buff1, uint16_t len1,
     }
     crcWrite();                     // CRC
 
-    // Wait for ACK in 100ms
-    if (timedRead(100) != 0xFF)
+    // Wait for ACK in 200ms
+    if (timedRead(200) != 0xFF)
       continue;
     crcReset();
     crcUpdate(0xFF);
