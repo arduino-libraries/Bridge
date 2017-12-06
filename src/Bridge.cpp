@@ -93,22 +93,22 @@ void BridgeClass::end() {
     max_retries = 1;
     transfer(quit_cmd, 5);
     delay(100);
-	stream.print(CTRL_C);
-	delay(250);
-	stream.print(F("\n"));
-	//expect a shell
-	bool done = false;
-	delay(100);
-	while (stream.available()) {
-	  char c = stream.read();
-	  if (c == '#') {
-		done = true;
-	    break;
-	  }
+    stream.print(CTRL_C);
+    delay(250);
+    stream.print(F("cd \n"));
+    //expect a shell
+    bool done = false;
+    delay(100);
+    while (stream.available()) {
+      char c = stream.read();
+      if (c == '#') {
+        done = true;
+        break;
+      }
     }
     if (done) {
-	  stream.print(F("reset\n"));
-	  break;
+      stream.print(F("reset\n"));
+      break;
     }
   }
   delay(100);
