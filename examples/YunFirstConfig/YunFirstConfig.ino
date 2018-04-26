@@ -31,7 +31,7 @@ void setup() {
   while (!SERIAL_PORT_USBVIRTUAL);     // do nothing until the serial monitor is opened
 
   SERIAL_PORT_USBVIRTUAL.println(F("Hi! Nice to see you!"));
-  SERIAL_PORT_USBVIRTUAL.println(F("I'm your YunShield assistant sketch"));
+  SERIAL_PORT_USBVIRTUAL.println(F("I'm your Yun assistant sketch"));
   SERIAL_PORT_USBVIRTUAL.println(F("I'll help you configuring your Yun in a matter of minutes"));
 
   SERIAL_PORT_USBVIRTUAL.println(F("Let's start by communicating with the Linux processor"));
@@ -62,7 +62,7 @@ void setup() {
 
   networks[0].reserve(32);
 
-  while (wifiList.available() > 0) {
+  while (wifiList.available() > 0 && i < MAX_WIFI_LIST) {
     c = wifiList.read();
     if (c != '\n') {
       networks[i] += c;
@@ -73,11 +73,14 @@ void setup() {
           dropNet = true;
         }
       }
-      if (i <= MAX_WIFI_LIST && dropNet == false) {
+      if (networks[i].c_str()[0] == ' ') {
+        dropNet = true;
+      }
+      if (i < MAX_WIFI_LIST && dropNet == false) {
         networks[i++].reserve(32);
       } else {
         dropNet = false;
-        networks[i]="";
+        networks[i] = "";
       }
     }
   }
@@ -215,6 +218,13 @@ void loop() {
       SERIAL_PORT_HARDWARE.flush();
       SERIAL_PORT_HARDWARE.println("\nreset\n\n");
       SERIAL_PORT_HARDWARE.write((uint8_t *)"\n", 1);
+      // discard all stuff for 2 seconds
+      long start = millis();
+      while (millis() - start < 2000) {
+        if (SERIAL_PORT_HARDWARE.available()) {
+          SERIAL_PORT_HARDWARE.read();
+        }
+      }
     }
 
   } else {
@@ -234,8 +244,14 @@ String getUserInput(String out, bool obfuscated) {
   while (SERIAL_PORT_USBVIRTUAL.available() <= 0) {}
   while (1) {
     char c = SERIAL_PORT_USBVIRTUAL.read();
-    if (c == '\n' || c == '\r')
+    char next = SERIAL_PORT_USBVIRTUAL.peek();
+    if (c == '\n' || c == '\r') {
+      if (next == '\n') {
+        // discard it
+        SERIAL_PORT_USBVIRTUAL.read();
+      }
       break;
+    }
     else {
       if (c != -1) {
         out += c;
