@@ -38,7 +38,7 @@ void setup() {
   SERIAL_PORT_HARDWARE.begin(linuxBaud); // open serial connection to Linux
 }
 
-boolean commandMode = false;
+bool commandMode = false;
 
 void loop() {
   // copy from USB-CDC to UART

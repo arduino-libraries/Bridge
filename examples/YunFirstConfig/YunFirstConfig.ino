@@ -301,7 +301,7 @@ void startSerialTerminal() {
   SERIAL_PORT_HARDWARE.begin(linuxBaud); // open serial connection to Linux
 }
 
-boolean commandMode = false;
+bool commandMode = false;
 void loopSerialTerminal() {
   // copy from USB-CDC to UART
   int c = SERIAL_PORT_USBVIRTUAL.read();    // read from USB-CDC
