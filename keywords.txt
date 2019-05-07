@@ -7,7 +7,7 @@
 #######################################
 
 Bridge	KEYWORD1	YunBridgeLibrary
-FileIO	KEYWORD4	YunFileIOConstructor
+FileIO	KEYWORD1	YunFileIOConstructor
 FileSystem	KEYWORD1	YunFileIOConstructor
 Console	KEYWORD1	YunConsoleConstructor
 Process	KEYWORD1	YunProcessConstructor
