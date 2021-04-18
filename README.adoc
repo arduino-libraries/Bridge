@@ -1,4 +1,9 @@
-= Bridge Library for Arduino =
+:repository-owner: arduino-libraries
+:repository-name: Bridge
+
+= {repository-name} Library for Arduino =
+
+image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml/badge.svg["Spell Check status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml"]
 
 The Bridge library simplifies communication between the ATmega32U4 and the AR9331.
 
