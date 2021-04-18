@@ -51,4 +51,3 @@ size_t BridgeServer::write(uint8_t c) {
   bridge.transfer(cmd, 2);
   return 1;
 }
-

@@ -1,13 +1,12 @@
-
 /*
   Arduino Yún First configuration sketch
 
-  Configures the YunShield/Yún WiFi and infos via the Bridge
+  Configures the Yun Shield/Yún WiFi and infos via the Bridge
   Works correctly if Line Ending is set as "NewLine"
   If your board has two USB ports, use the Native one
 
   The circuit:
-   Arduino YunShield
+   Arduino Yun Shield
    (or any Yun model with firmware > 1.6.1)
 
   created March 2016
@@ -15,7 +14,7 @@
 
   This example code is in the public domain.
 
-  http://www.arduino.cc/en/Tutorial/YunFirstConfig
+  https://www.arduino.cc/en/Tutorial/LibraryExamples/YunFirstConfig
 */
 
 #include <Process.h>
@@ -28,7 +27,7 @@ String yunPassword;
 
 void setup() {
   SERIAL_PORT_USBVIRTUAL.begin(9600);  // initialize serial communication
-  while (!SERIAL_PORT_USBVIRTUAL);     // do nothing until the serial monitor is opened
+  while (!SERIAL_PORT_USBVIRTUAL);     // do nothing until the Serial Monitor is opened
 
   SERIAL_PORT_USBVIRTUAL.println(F("Hi! Nice to see you!"));
   SERIAL_PORT_USBVIRTUAL.println(F("I'm your Yun assistant sketch"));
@@ -37,10 +36,10 @@ void setup() {
   SERIAL_PORT_USBVIRTUAL.println(F("Let's start by communicating with the Linux processor"));
   SERIAL_PORT_USBVIRTUAL.println(F("When LED (L13) will light up we'll be ready to go!"));
   SERIAL_PORT_USBVIRTUAL.println(F("Waiting..."));
-  SERIAL_PORT_USBVIRTUAL.println(F("(in the meanwhile, if you are using the IDE's serial monitor, make sure that it's configured to send a \"Newline\")\n"));
+  SERIAL_PORT_USBVIRTUAL.println(F("(in the meanwhile, if you are using the IDE's Serial Monitor, make sure that it's configured to send a \"Newline\")\n"));
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
-  Bridge.begin();  // make contact with the linux processor
+  Bridge.begin();  // make contact with the Linux processor
   digitalWrite(13, HIGH);  // Led on pin 13 turns on when the bridge is ready
 
   // Recover if the board is in AP mode - unused
@@ -272,11 +271,11 @@ void wifiConfig(String yunName, String yunPsw, String wifissid, String wifipsw, 
   p.runShellCommand("blink-start 100"); //start the blue blink
 
   p.runShellCommand("hostname " + yunName); //change the current hostname
-  p.runShellCommand("uci set system.@system[0].hostname='" + yunName + "'"); //change teh hostname in uci
+  p.runShellCommand("uci set system.@system[0].hostname='" + yunName + "'"); //change the hostname in uci
 
   p.runShellCommand("uci set arduino.@arduino[0].access_point_wifi_name='" + wifiAPname + "'");
 
-  //this block resets the wifi psw
+  //this block resets the WiFi psw
   p.runShellCommand("uci set wireless.@wifi-iface[0].encryption='" + encryption + "'");
   p.runShellCommand("uci set wireless.@wifi-iface[0].mode='sta'\n");
   p.runShellCommand("uci set wireless.@wifi-iface[0].ssid='" + wifissid + "'");
@@ -287,7 +286,7 @@ void wifiConfig(String yunName, String yunPsw, String wifissid, String wifipsw, 
   p.runShellCommand("uci delete network.lan.netmask");
   p.runShellCommand("uci set network.lan.proto='dhcp'");
 
-  p.runShellCommand("echo -e \"" + yunPsw + "\n" + yunPsw + "\" | passwd root"); //change the passwors
+  p.runShellCommand("echo -e \"" + yunPsw + "\n" + yunPsw + "\" | passwd root"); //change the password
   p.runShellCommand("uci commit"); //save the mods done via UCI
   p.runShellCommand("blink-stop"); //start the blue blink
 

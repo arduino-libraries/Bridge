@@ -1,7 +1,7 @@
 /*
   Write to file using FileIO classes.
 
- This sketch demonstrate how to write file into the YunShield/Yún filesystem.
+ This sketch demonstrate how to write file into the Yun Shield/Yún filesystem.
  A shell script file is created in /tmp, and it is executed afterwards.
 
  created 7 June 2010
@@ -9,7 +9,7 @@
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/FileWriteScript
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/FileWriteScript
 
  */
 
@@ -37,7 +37,7 @@ void loop() {
   delay(5000);
 }
 
-// this function creates a file into the linux processor that contains a shell script
+// this function creates a file into the Linux processor that contains a shell script
 // to check the network traffic of the WiFi interface
 void uploadScript() {
   // Write our shell script in /tmp
@@ -63,7 +63,7 @@ void uploadScript() {
 }
 
 
-// this function run the script and read the output data
+// this function runs the script and reads the output data
 void runScript() {
   // Run the script and show results on the Serial
   Process myscript;
@@ -76,7 +76,7 @@ void runScript() {
   while (myscript.available()) {
     output += (char)myscript.read();
   }
-  // remove the blank spaces at the beginning and the ending of the string
+  // remove the blank spaces at the beginning and the end of the string
   output.trim();
   SerialUSB.println(output);
   SerialUSB.flush();

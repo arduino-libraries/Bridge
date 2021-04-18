@@ -1,13 +1,13 @@
 /*
   Arduino Yún Bridge example
 
-  This example for the YunShield/Yún shows how 
+  This example for the Yun Shield/Yún shows how 
   to use the Bridge library to access the digital and
   analog pins on the board through REST calls.
   It demonstrates how you can create your own API when
   using REST style calls through the browser.
 
-  Possible commands created in this shetch:
+  Possible commands created in this sketch:
 
   "/arduino/digital/13"     -> digitalRead(13)
   "/arduino/digital/13/1"   -> digitalWrite(13, HIGH)
@@ -18,7 +18,7 @@
 
   This example code is part of the public domain
 
-  http://www.arduino.cc/en/Tutorial/Bridge
+  https://www.arduino.cc/en/Tutorial/LibraryExamples/Bridge
 
 */
 
@@ -56,7 +56,7 @@ void loop() {
     client.stop();
   }
 
-  delay(50); // Poll every 50ms
+  delay(50); // Poll every 50 ms
 }
 
 void process(BridgeClient client) {

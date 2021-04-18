@@ -23,7 +23,7 @@ BridgeSSLClient	KEYWORD1	YunClientConstructor
 # Methods and Functions (KEYWORD2)
 #######################################
 
-# methods names in commond
+# method names in common
 begin	KEYWORD2
 end	KEYWORD2
 available	KEYWORD2

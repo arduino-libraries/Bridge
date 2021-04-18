@@ -2,17 +2,17 @@
   SD card datalogger
 
  This example shows how to log data from three analog sensors
- to an SD card mounted on the YunShield/Yún using the Bridge library.
+ to an SD card mounted on the Yun Shield/Yún using the Bridge library.
 
  The circuit:
  * analog sensors on analog pins 0, 1 and 2
- * SD card attached to SD card slot of the YunShield/Yún
+ * SD card attached to SD card slot of the Yun Shield/Yún
 
- Prepare your SD card creating an empty folder in the SD root
+ Prepare your SD card by creating an empty folder in the SD root
  named "arduino". This will ensure that the Yún will create a link
  to the SD to the "/mnt/sd" path.
 
- You can remove the SD card while the Linux and the
+ You can remove the SD card while Linux and the
  sketch are running but be careful not to remove it while
  the system is writing to it.
 
@@ -26,7 +26,7 @@
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/YunDatalogger
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/YunDatalogger
 
  */
 
@@ -79,7 +79,7 @@ void loop() {
 
 }
 
-// This function return a string with the time stamp
+// This function returns a string with the timestamp
 String getTimeStamp() {
   String result;
   Process time;

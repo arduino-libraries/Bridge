@@ -55,7 +55,7 @@ void BridgeClass::begin() {
     delay(500);
     dropAll();
 
-    // Reset the brigde to check if it is running
+    // Reset the bridge to check if it is running
     uint8_t cmd[] = {'X', 'X', '1', '0', '0'};
     uint8_t res[4];
     max_retries = 50;
@@ -309,4 +309,3 @@ SerialBridgeClass Bridge(Serial1);
 #else
 SerialBridgeClass Bridge(Serial);
 #endif
-

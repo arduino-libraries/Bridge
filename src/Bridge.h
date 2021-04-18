@@ -44,7 +44,7 @@ class BridgeClass {
       return get(key, reinterpret_cast<uint8_t *>(value), maxlen);
     }
 
-    // Trasnfer a frame (with error correction and response)
+    // Transfer a frame (with error correction and response)
     uint16_t transfer(const uint8_t *buff1, uint16_t len1,
                       const uint8_t *buff2, uint16_t len2,
                       const uint8_t *buff3, uint16_t len3,

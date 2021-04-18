@@ -201,4 +201,3 @@ void HttpClient::addHeader() {
     addParameter(header);
   }
 }
-
