@@ -92,7 +92,7 @@ boolean File::seek(uint32_t position) {
   uint8_t res[1];
   bridge.transfer(cmd, 6, res, 1);
   if (res[0] == 0) {
-    // If seek succeed then flush buffers
+    // If seek succeeds then flush buffers
     buffered = 0;
     return true;
   }

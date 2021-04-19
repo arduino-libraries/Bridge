@@ -1,11 +1,11 @@
 /*
   Read Messages from the Mailbox
 
- This example for the YunShield/Yún shows how to
+ This example for the Yun Shield/Yún shows how to
  read the messages queue, called Mailbox, using the
  Bridge library.
  The messages can be sent to the queue through REST calls.
- Appen the message in the URL after the keyword "/mailbox".
+ Append the message in the URL after the keyword "/mailbox".
  Example
 
  "/mailbox/hello"
@@ -15,7 +15,7 @@
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/MailboxReadMessage
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/MailboxReadMessage
 
  */
 

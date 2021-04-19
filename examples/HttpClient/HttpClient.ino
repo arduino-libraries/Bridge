@@ -1,7 +1,7 @@
 /*
   Yún HTTP Client
 
- This example for the YunShield/Yún shows how create a basic
+ This example for the Yun Shield/Yún shows how create a basic
  HTTP client that connects to the internet and downloads
  content. In this case, you'll connect to the Arduino
  website and download a version of the logo as ASCII text.
@@ -11,7 +11,7 @@
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/HttpClient
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/HttpClient
 
  */
 

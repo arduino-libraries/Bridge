@@ -2,7 +2,7 @@
   Time Check
 
  Gets the time from Linux via Bridge then parses out hours,
- minutes and seconds using a YunShield/Yún.
+ minutes and seconds using a Yun Shield/Yún.
 
  created  27 May 2013
  modified 21 June 2013
@@ -10,7 +10,7 @@
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/TimeCheck
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/TimeCheck
 
  */
 

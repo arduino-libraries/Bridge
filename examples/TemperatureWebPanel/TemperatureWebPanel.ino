@@ -2,13 +2,13 @@
   Temperature web interface
 
  This example shows how to serve data from an analog input
- via the YunShield/Yún built-in webserver using the Bridge library.
+ via the Yun Shield/Yún built-in webserver using the Bridge library.
 
  The circuit:
  * TMP36 temperature sensor on analog pin A1
- * SD card attached to SD card slot of the YunShield/Yún
+ * SD card attached to SD card slot of the Yun Shield/Yún
 
- This sketch must be uploaded via wifi. REST API must be set to "open".
+ This sketch must be uploaded via WiFi. REST API must be set to "open".
 
  Prepare your SD card with an empty folder in the SD root
  named "arduino" and a subfolder of that named "www".
@@ -31,7 +31,7 @@
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/TemperatureWebPanel
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/TemperatureWebPanel
 
  */
 
@@ -54,7 +54,7 @@ void setup() {
   Bridge.begin();
   digitalWrite(13, HIGH);
 
-  // using A0 and A2 as vcc and gnd for the TMP36 sensor:
+  // using A0 and A2 as Vcc and gnd for the TMP36 sensor:
   pinMode(A0, OUTPUT);
   pinMode(A2, OUTPUT);
   digitalWrite(A0, HIGH);

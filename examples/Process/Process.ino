@@ -1,15 +1,15 @@
 /*
   Running process using Process class.
 
- This sketch demonstrate how to run linux processes
- using a YunShield/Yún
+ This sketch demonstrates how to run Linux processes
+ using a Yun Shield/Yún
 
  created 5 Jun 2013
  by Cristian Maglie
 
  This example code is in the public domain.
 
- http://www.arduino.cc/en/Tutorial/Process
+ https://www.arduino.cc/en/Tutorial/LibraryExamples/Process
 
  */
 
@@ -35,14 +35,14 @@ void loop() {
 }
 
 void runCurl() {
-  // Launch "curl" command and get Arduino ascii art logo from the network
+  // Launch "curl" command and get Arduino ASCII art logo from the network
   // curl is command line program for transferring data using different internet protocols
   Process p;		// Create a process and call it "p"
   p.begin("curl");	// Process that launch the "curl" command
   p.addParameter("http://www.arduino.cc/asciilogo.txt"); // Add the URL parameter to "curl"
   p.run();		// Run the process and wait for its termination
 
-  // Print arduino logo over the Serial
+  // Print Arduino logo over the Serial
   // A process output can be read with the stream methods
   while (p.available() > 0) {
     char c = p.read();

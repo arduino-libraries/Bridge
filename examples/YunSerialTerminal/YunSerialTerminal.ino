@@ -1,15 +1,15 @@
 /*
   Arduino Yún USB-to-Serial
 
-  Allows you to use the YunShield/Yún processor as a
+  Allows you to use the Yun Shield/Yún processor as a
   serial terminal for the Linux side on the Yún.
 
-  Upload this to a YunShield/Yún via serial (not WiFi) then open
-  the serial monitor at 115200 to see the boot process of Linux.
-  You can also use the serial monitor as a basic command line
+  Upload this to a Yun Shield/Yún via serial (not WiFi) then open
+  the Serial Monitor at 115200 to see the boot process of Linux.
+  You can also use the Serial Monitor as a basic command line
   interface for Linux using this sketch.
 
-  From the serial monitor the following commands can be issued:
+  From the Serial Monitor the following commands can be issued:
 
   '~' followed by '0' -> Set the UART speed to 57600 baud
   '~' followed by '1' -> Set the UART speed to 115200 baud
@@ -19,7 +19,7 @@
                         obtain the console.
 
   The circuit:
-   YunShield/Yún
+   Yun Shield/Yún
 
   created March 2013
   by Massimo Banzi
@@ -27,7 +27,7 @@
 
   This example code is in the public domain.
 
-  http://www.arduino.cc/en/Tutorial/YunSerialTerminal
+  https://www.arduino.cc/en/Tutorial/LibraryExamples/YunSerialTerminal
 
 */
 
